@@ -1,20 +1,9 @@
-from flask import Flask, request, jsonify
+from flask import Flask
+app = Flask(__name__)
 
-app = Flask(__name__)   # ✅ app is defined HERE
-
-@app.route("/health", methods=["GET"])
+@app.route('/')
 def hello():
-    return jsonify({"status" : "OK"}) 
+    return "<h1>Hello from GitOps! Version 1.0</h1>"
 
-@app.route("/predict", methods=["POST"])
-def predict():
-    data= request.json
-    age=data.get("age")
-    salary=data.get("salary")
-    prediction="yes" if age>40000 else "No"
-    return jsonify({"prediction": prediction})
-    
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="6000")
-
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)
