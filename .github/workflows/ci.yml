@@ -48,6 +48,7 @@ jobs:
       - name: Update Image Tag
         run: |
           # Using sed to replace the image tag in deployment.yaml
+          echo $needs.build-and-push.outputs.commit_sha
           sed -i "s|image: ghcr.io/${{ github.repository }}:.*|image: ghcr.io/${{ github.repository }}:${{ needs.build-and-push.outputs.commit_sha }}|g" deployment.yaml
 
       - name: Commit and Push Changes
